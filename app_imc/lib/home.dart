@@ -22,11 +22,11 @@ class _HomeState extends State<Home> {
 
       if(resultado < 18.5){
         infoResultado = 'Você esta abaixo do peso!';
-      }else if(resultado >= 18.5 && resultado < 24.9){
+      }else if(resultado >= 18.5 && resultado <= 24.9){
         infoResultado = 'O seu peso é o ideal';
-      }else if(resultado >= 25 && resultado < 29.9){
+      }else if(resultado >= 25 && resultado <= 29.9){
         infoResultado = 'Você esta com sobrepeso!';
-      }else if(resultado >= 30 && resultado < 34.9){
+      }else if(resultado >= 30 && resultado <= 34.9){
         infoResultado = 'Você esta com obsidade de Grau I!';
       }else if(resultado >= 35 && resultado <= 39.9){
         infoResultado = 'Você esta com obsidade de Grau II!';
