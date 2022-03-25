@@ -8,21 +8,31 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  TextEditingController alcoolController = TextEditingController();
-  TextEditingController gasolinaController = TextEditingController();
+  TextEditingController pesoController = TextEditingController();
+  TextEditingController alturaController = TextEditingController();
 
   String infoResultado = "";
 
   void _calcularValor() {
     setState(() {
-      double alcool = double.parse(alcoolController.text);
-      double gasolina = double.parse(gasolinaController.text);
+      double peso = double.parse(pesoController.text);
+      double altura = double.parse(alturaController.text);
 
-      double resultado = alcool / gasolina;
-      if(resultado > 0.7){
-        infoResultado = 'A gasolina esta mais em conta!';
-      }else{
-        infoResultado = 'O alcool esta mais em conta!';
+      double resultado = peso / (altura * altura);
+
+      if(resultado < 18.5){
+        infoResultado = 'Você esta abaixo do peso!';
+      }else if(resultado >= 18.5 && resultado < 24.9){
+        infoResultado = 'O seu peso é o ideal';
+      }else if(resultado >= 25 && resultado < 29.9){
+        infoResultado = 'Você esta com sobrepeso!';
+      }else if(resultado >= 30 && resultado < 34.9){
+        infoResultado = 'Você esta com obsidade de Grau I!';
+      }else if(resultado >= 35 && resultado <= 39.9){
+        infoResultado = 'Você esta com obsidade de Grau II!';
+      }
+      else{
+       infoResultado = 'Você esta com obsidade de Grau III!'; 
       }
 
       
@@ -40,7 +50,7 @@ class _HomeState extends State<Home> {
 
   _titulo() {
     return AppBar(
-      title: Text("Alcool ou gasolina?"),
+      title: Text("Calculo de IMC"),
       centerTitle: true,
       backgroundColor: Color.fromARGB(255, 10, 50, 182),
     );
@@ -49,8 +59,8 @@ class _HomeState extends State<Home> {
   _corpo() {
     var children2 = <Widget>[
           _foto(),
-          _campo("Preço do alcool", alcoolController),
-          _campo("Preço da gasolina", gasolinaController),
+          _campo("Digite o seu peso:", pesoController),
+          _campo("Digite a sua altura:", alturaController),
           _botao(),
           _texto(infoResultado),
         ];
@@ -82,7 +92,7 @@ class _HomeState extends State<Home> {
         height: 50.0,
         child: RaisedButton(
           onPressed: _calcularValor,
-          child: Text("Verificar",
+          child: Text("Calcular IMC",
               style: TextStyle(color: Colors.white, fontSize: 20.0)),
           color: Color.fromARGB(255, 6, 170, 6),
         ),
@@ -101,7 +111,7 @@ class _HomeState extends State<Home> {
  _foto() {
     return Center(
       child: Image.network(
-        'https://www.sulinfoco.com.br/wp-content/uploads/2018/05/ico-destinonegocio-como-abrir-um-posto-de-gasolina-istock-getty-images1-1030x684.jpg',
+        'https://img.medscapestatic.com/pt/thumbnail_library/6505381-thumb.jpg',
         height: 250,
         width: 250,
       ),
